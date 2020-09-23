@@ -40,9 +40,7 @@ public class PersonAccessDataService implements PersonDAO {
     @Override
     public void deletePerson(UUID id) {
         Optional<Person> personMayBe = getAPerson(id);
-        if (personMayBe.isPresent()) {
-            DB.remove(personMayBe.get());
-        }
+        personMayBe.ifPresent(person -> DB.remove(person));
     }
 
     @Override
