@@ -66,11 +66,15 @@ public class PersonAccessDataPostgesService implements PersonDAO {
 
     @Override
     public void deletePerson(UUID id) {
-
+        final String sql = "DELETE FROM person WHERE id = ?" ;
+        Optional<Person> personMayBe = getAPerson(id);
+        personMayBe.ifPresent(person -> jdbcTemplate.update(sql, id));
     }
 
     @Override
     public boolean updatePerson(UUID id, Person newPerson) {
-        return false;
+        final String sql = "UPDATE person SET email = ? , phone = ? , team = ? , role = ? ";
+        jdbcTemplate.update(sql, newPerson.getEmail(), newPerson.getPhone(), newPerson.getTeam(), newPerson.getRole());
+        return true;
     }
 }
