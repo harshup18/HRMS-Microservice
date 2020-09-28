@@ -21,14 +21,12 @@ public class PersonAccessDataPostgesService implements PersonDAO {
 
     @Override
     public boolean insertPerson(UUID id, Person person) {
-        final String sql = "INSERT INTO person (id, name, email, phone, team, role, doj)" +
-                " VALUES" + "(" +
-                person.getId() + ", '" + person.getName() + "', '" +
-                person.getEmail() + "', '" + person.getPhone() + "', '" +
-                person.getTeam() + "', '" + person.getRole() + "', ," +
-                person.getDoj() + "'";
-        jdbcTemplate.update(sql);
-        return true;
+        final String sql = "INSERT INTO person (id, name, email, phone, team, role, doj) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        int res = jdbcTemplate.update(sql, id, person.getName(), person.getEmail(), person.getPhone(), person.getTeam(), person.getRole(), person.getDoj());
+        if (res == 1)
+            return true;
+        else
+            return false;
     }
 
     @Override
@@ -48,7 +46,7 @@ public class PersonAccessDataPostgesService implements PersonDAO {
 
     @Override
     public Optional<Person> getAPerson(UUID id) {
-        final String sql = "SELECT id, name FROM person WHERE id = ?";
+        final String sql = "SELECT id, name, email, phone, team, role, doj FROM person WHERE id = ?";
         Person person = jdbcTemplate.queryForObject(sql,
                 new Object[]{id},
                 (resultSet, i) -> {
@@ -66,15 +64,19 @@ public class PersonAccessDataPostgesService implements PersonDAO {
 
     @Override
     public void deletePerson(UUID id) {
-        final String sql = "DELETE FROM person WHERE id = ?" ;
+        final String sql = "DELETE FROM person WHERE id = ?";
         Optional<Person> personMayBe = getAPerson(id);
         personMayBe.ifPresent(person -> jdbcTemplate.update(sql, id));
+       jdbcTemplate.update(sql, id);
     }
 
     @Override
     public boolean updatePerson(UUID id, Person newPerson) {
-        final String sql = "UPDATE person SET email = ? , phone = ? , team = ? , role = ? ";
-        jdbcTemplate.update(sql, newPerson.getEmail(), newPerson.getPhone(), newPerson.getTeam(), newPerson.getRole());
-        return true;
+        final String sql = "UPDATE person SET email = ? , phone = ? , team = ? , role = ?  WHERE id = ?";
+        int res = jdbcTemplate.update(sql, newPerson.getEmail(), newPerson.getPhone(), newPerson.getTeam(), newPerson.getRole(), id);
+        if (res == 1)
+            return true;
+        else
+            return false;
     }
 }
