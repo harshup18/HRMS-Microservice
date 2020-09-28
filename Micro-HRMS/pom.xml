@@ -12,7 +12,7 @@
 	<artifactId>Micro-HRMS</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Micro-HRMS</name>
-	<description>A simplified microservice for Employee Management System,</description>
+	<description>A simplified microservice for Employee Management System</description>
 
 	<properties>
 		<java.version>1.8</java.version>

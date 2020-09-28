@@ -1,0 +1,8 @@
+version: "3.8"
+services:
+  web:
+    image: "roosthrms"
+    ports:
+      - "8080:8080"
+  postgres:
+    image: "postgres-spring"
