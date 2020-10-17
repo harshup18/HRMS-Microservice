@@ -1,8 +1,8 @@
-com\example\Micro\HRMS\api\PersonController.class
-com\example\Micro\HRMS\datasource\PostgresDataSource.class
-com\example\Micro\HRMS\dao\PersonDAO.class
-com\example\Micro\HRMS\dao\PersonAccessDataPostgesService.class
-com\example\Micro\HRMS\service\PersonService.class
-com\example\Micro\HRMS\MicroHrmsApplication.class
-com\example\Micro\HRMS\dao\PersonAccessDataService.class
-com\example\Micro\HRMS\model\Person.class
+com/example/Micro/HRMS/dao/PersonDAO.class
+com/example/Micro/HRMS/model/Person.class
+com/example/Micro/HRMS/MicroHrmsApplication.class
+com/example/Micro/HRMS/dao/PersonAccessDataService.class
+com/example/Micro/HRMS/api/PersonController.class
+com/example/Micro/HRMS/datasource/PostgresDataSource.class
+com/example/Micro/HRMS/dao/PersonAccessDataPostgesService.class
+com/example/Micro/HRMS/service/PersonService.class
